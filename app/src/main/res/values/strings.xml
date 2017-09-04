@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">ExerciseConvertini</string>
     <string name="action_settings">Settings</string>
+    <string name="Api_KEY">LSbxZBbyGHytZE_4jZ-x9xsQCaQUyQ==QEBTM2xsRk9yQXBpVDE0MSEhMTI2ISE=</string>
+    <string name="SERVER_URL">https://api.sellf.io/v2/</string>
+    <string name="empty_list_text">Errore di connessione. &#xD;Riprova più tardi</string>
+    <string name="EXTRA_PERSON_ID">extra_person_id</string>
+    <string name="AUTORIZZAZIONE_NEGATA">Non sei autorizzato</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
