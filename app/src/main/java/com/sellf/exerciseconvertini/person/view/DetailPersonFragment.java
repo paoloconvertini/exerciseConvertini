@@ -25,6 +25,7 @@ public class DetailPersonFragment extends Fragment {
     private TextView skype;
     private TextView email;
     private TextView address;
+    private TextView ErrorTxtView;
 
     public DetailPersonFragment() {
         // Required empty public constructor
@@ -60,7 +61,7 @@ public class DetailPersonFragment extends Fragment {
         View personView = inflater.inflate(R.layout.fragment_detail_person, container, false);
         loadingIndicator = personView.findViewById(R.id.loading_indicator_fragment_person_detail);
         fullname = personView.findViewById(R.id.full_name);
-        title = personView.findViewById(R.id.title);
+        title = personView.findViewById(R.id.title_person_detail);
         skype = personView.findViewById(R.id.skype);
         email = personView.findViewById(R.id.email);
         address = personView.findViewById(R.id.address);
@@ -91,6 +92,11 @@ public class DetailPersonFragment extends Fragment {
             @Override
             public void onFailure(Call<Person> call, Throwable t) {
                 hideLoadingIndicator();
+                if (getView() != null) {
+                    ErrorTxtView = getView()
+                            .findViewById(R.id.emptyViewTxt);
+                    ErrorTxtView.setText(R.string.empty_list_text);
+                }
             }
         });
     }

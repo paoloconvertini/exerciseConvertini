@@ -18,7 +18,7 @@ public class Person {
     private String website;
     @SerializedName("company_id")
     @Expose
-    private Integer companyId;
+    private String companyId;
     @SerializedName("fax")
     @Expose
     private String fax;
@@ -27,7 +27,7 @@ public class Person {
     private String firstName;
     @SerializedName("user_id")
     @Expose
-    private Integer userId;
+    private String userId;
     @SerializedName("description")
     @Expose
     private String description;
@@ -46,18 +46,9 @@ public class Person {
     @SerializedName("mobile")
     @Expose
     private String mobile;
-    /*@SerializedName("created_at")
-    @Expose
-    private LocalDateTime createdAt;*/
     @SerializedName("skype")
     @Expose
     private String skype;
-    /* @SerializedName("updated_at")
-        @Expose
-        private LocalDateTime updatedAt;*/
-    @SerializedName("longitude")
-    @Expose
-    private String longitude;
     @SerializedName("id")
     @Expose
     private String id;
@@ -73,9 +64,6 @@ public class Person {
     @SerializedName("address")
     @Expose
     private String address;
-    @SerializedName("latitude")
-    @Expose
-    private String latitude;
     @SerializedName("email_secondary")
     @Expose
     private String emailSecondary;
@@ -119,6 +107,47 @@ public class Person {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+
+    }
+
+    public Person(String companyId, String firstName, String userId,
+                  String title, String phone, String lastName, String address, String email) {
+        this.companyId = companyId;
+        this.firstName = firstName;
+        this.userId = userId;
+        this.title = title;
+        this.phone = phone;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
     }
 }
 

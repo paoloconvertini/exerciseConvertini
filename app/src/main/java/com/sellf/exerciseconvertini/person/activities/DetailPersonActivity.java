@@ -16,7 +16,7 @@ public class DetailPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_person);
 
 
-        //get extra numero camera and save in the variable numeroCamera
+        //get extra person id and save in the variableid
         String id = getIntent()
                 .getStringExtra(getString(R.string.EXTRA_PERSON_ID));
 

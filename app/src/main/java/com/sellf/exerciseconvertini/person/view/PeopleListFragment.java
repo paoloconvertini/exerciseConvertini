@@ -1,7 +1,9 @@
 package com.sellf.exerciseconvertini.person.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.sellf.exerciseconvertini.API.Api;
 import com.sellf.exerciseconvertini.R;
+import com.sellf.exerciseconvertini.person.activities.CreatePersonActivity;
 import com.sellf.exerciseconvertini.person.adapters.PersonRecyclerViewAdapter;
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
 import com.sellf.exerciseconvertini.person.model.People;
@@ -64,6 +67,16 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people_list, container, false);
 
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreatePersonActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         // Set the adapter
         mRecyclerView = view.findViewById(R.id.recyclerViewPeopleList);
         mRecyclerView.setHasFixedSize(true);
@@ -112,7 +125,7 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
         hideLoadingIndicator();
         if (getView() != null) {
             ErrorTxtView =  getView()
-                    .findViewById(R.id.emptyViewTxtMinibarRoomList);
+                    .findViewById(R.id.emptyViewTxt);
             ErrorTxtView.setText(R.string.empty_list_text);
         }
     }
