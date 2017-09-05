@@ -1,4 +1,4 @@
-package com.sellf.exerciseconvertini.person.model;
+package com.sellf.exerciseconvertini.person.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sellf.exerciseconvertini.R;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
 
 /**
  * Created by pconvertini on 04/09/2017.

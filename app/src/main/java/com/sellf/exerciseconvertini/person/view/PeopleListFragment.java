@@ -18,8 +18,8 @@ import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.person.activities.CreatePersonActivity;
 import com.sellf.exerciseconvertini.person.adapters.PersonRecyclerViewAdapter;
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
-import com.sellf.exerciseconvertini.person.model.People;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.People;
+import com.sellf.exerciseconvertini.person.models.Person;
 
 import java.util.ArrayList;
 

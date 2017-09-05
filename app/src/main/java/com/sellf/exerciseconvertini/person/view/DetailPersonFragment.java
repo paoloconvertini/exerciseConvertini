@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.sellf.exerciseconvertini.API.Api;
 import com.sellf.exerciseconvertini.R;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
 
 import retrofit2.Call;
 import retrofit2.Callback;

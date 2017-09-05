@@ -11,10 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sellf.exerciseconvertini.API.Api;
+import com.sellf.exerciseconvertini.error.models.ErrorBody;
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.person.activities.PeopleListActivity;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,16 +27,14 @@ import retrofit2.Response;
 
 public class CreatePersonFragment extends Fragment {
 
-    private String userId;
-    private EditText firstname;
-    private EditText lastname;
+    private int userId;
+    private EditText firstName;
+    private EditText lastName;
     private EditText title;
     private EditText company;
     private EditText email;
     private EditText address;
     private EditText phone;
-    private Button saveBtn;
-    private Api api;
 
     public CreatePersonFragment() {
         // Required empty public constructor
@@ -45,10 +47,10 @@ public class CreatePersonFragment extends Fragment {
      * @param userId is the user Id.
      * @return A new instance of fragment CreatePersonFragment.
      */
-    public static CreatePersonFragment newInstance(String userId) {
+    public static CreatePersonFragment newInstance(int userId) {
         CreatePersonFragment fragment = new CreatePersonFragment();
         Bundle args = new Bundle();
-        args.putString(String.valueOf(R.string.EXTRA_USER_ID), userId);
+        args.putInt(String.valueOf(R.string.EXTRA_USER_ID), userId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +59,7 @@ public class CreatePersonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            userId = getArguments().getString(String.valueOf(R.string.EXTRA_USER_ID));
+            userId = getArguments().getInt(String.valueOf(R.string.EXTRA_USER_ID));
         }
     }
 
@@ -66,19 +68,19 @@ public class CreatePersonFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_person, container, false);
-        firstname = view.findViewById(R.id.first_name);
-        lastname = view.findViewById(R.id.last_name);
+        firstName = view.findViewById(R.id.first_name);
+        lastName = view.findViewById(R.id.last_name);
         title = view.findViewById(R.id.title_person_create);
         company = view.findViewById(R.id.company);
         email = view.findViewById(R.id.email);
         address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
-        saveBtn = view.findViewById(R.id.saveBtn);
+        Button saveBtn = view.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createPerson(new Person(company.getText().toString(), firstname.getText().toString(), userId,
-                        title.getText().toString(), phone.getText().toString(), lastname.getText().toString(),
+                createPerson(new Person(company.getText().toString(), firstName.getText().toString(), userId,
+                        title.getText().toString(), phone.getText().toString(), lastName.getText().toString(),
                         address.getText().toString(), email.getText().toString()));
             }
         });
@@ -86,30 +88,49 @@ public class CreatePersonFragment extends Fragment {
     }
 
     private void createPerson(Person person) {
-        api = new Api();
-        Call<Person> postPerson = api.createPerson(person);
-        postPerson.enqueue(new Callback<Person>() {
-            @Override
-            public void onResponse(Call<Person> call, Response<Person> response) {
-                response.body();
-                Toast.makeText(getContext(), "Contatto aggiunto con successo", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), PeopleListActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailure(Call<Person> call, Throwable t) {
-                try {
-                    if (getView() != null) {
-                        TextView textView = getView()
-                                .findViewById(R.id.emptyViewTxt);
-                        textView.setText(R.string.empty_list_text);
+        if (person.getFirstName().equals("") || person.getLastName().equals("") ||
+                person.getEmail().equals("") || person.getPhone().equals("")) {
+            Toast.makeText(getContext(), "Nome, Cognome, Email e telefono" +
+                    " non possono essere vuoti", Toast.LENGTH_LONG).show();
+        } else {
+            new Api().createPerson(person).enqueue(new Callback<Person>() {
+                @Override
+                public void onResponse(Call<Person> call, Response<Person> response) {
+                    switch (response.code()) {
+                        case 422:
+                            try {
+                                ErrorBody errorBody = new Gson().fromJson(response.errorBody().string(),
+                                        ErrorBody.class);
+                                errorBody.getError().getDetails().getEmail();
+                                Toast.makeText(getContext(), errorBody.getError().getDetails().getEmail() +
+                                        " for email field",
+                                        Toast.LENGTH_LONG).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case 201:
+                            Toast.makeText(getContext(), "Contatto aggiunto con successo", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getActivity(), PeopleListActivity.class);
+                            startActivity(intent);
+                            break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
+                }
+
+                @Override
+                public void onFailure(Call<Person> call, Throwable t) {
+                    try {
+                        if (getView() != null) {
+                            TextView textView = getView()
+                                    .findViewById(R.id.emptyViewTxt);
+                            textView.setText(R.string.empty_list_text);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
 }

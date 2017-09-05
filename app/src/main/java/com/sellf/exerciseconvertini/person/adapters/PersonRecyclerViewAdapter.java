@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
 import com.sellf.exerciseconvertini.person.view.PersonViewHolder;
 
 import java.util.ArrayList;

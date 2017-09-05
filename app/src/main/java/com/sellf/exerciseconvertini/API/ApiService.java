@@ -1,7 +1,7 @@
 package com.sellf.exerciseconvertini.API;
 
-import com.sellf.exerciseconvertini.person.model.People;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.People;
+import com.sellf.exerciseconvertini.person.models.Person;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

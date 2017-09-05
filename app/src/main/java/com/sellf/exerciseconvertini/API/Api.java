@@ -1,11 +1,11 @@
 package com.sellf.exerciseconvertini.API;
 
 import com.google.gson.GsonBuilder;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
 import com.sellf.exerciseconvertini.utils.DateTypeAdapter;
 import com.sellf.exerciseconvertini.App;
 import com.sellf.exerciseconvertini.R;
-import com.sellf.exerciseconvertini.person.model.People;
+import com.sellf.exerciseconvertini.person.models.People;
 
 import org.joda.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.sellf.exerciseconvertini.person.model;
+package com.sellf.exerciseconvertini.person.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -27,7 +27,7 @@ public class Person {
     private String firstName;
     @SerializedName("user_id")
     @Expose
-    private String userId;
+    private int userId;
     @SerializedName("description")
     @Expose
     private String description;
@@ -88,7 +88,9 @@ public class Person {
 
         return firstName + " " + lastName;
     }
-
+    public String getPhone() {
+        return phone;
+    }
     public String getTitle() {
         return title;
     }
@@ -113,7 +115,7 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -138,7 +140,7 @@ public class Person {
 
     }
 
-    public Person(String companyId, String firstName, String userId,
+    public Person(String companyId, String firstName, int userId,
                   String title, String phone, String lastName, String address, String email) {
         this.companyId = companyId;
         this.firstName = firstName;

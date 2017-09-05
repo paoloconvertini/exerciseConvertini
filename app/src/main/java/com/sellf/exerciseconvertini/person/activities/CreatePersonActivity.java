@@ -17,7 +17,7 @@ public class CreatePersonActivity extends AppCompatActivity {
 
         //start a new DetailPersonFragment instance and pass in the Person Id as argument
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = CreatePersonFragment.newInstance("113310"); //non ho trovato endpoint per postare i miei dati di login, ma ho
+        Fragment fragment = CreatePersonFragment.newInstance(113310); //non ho trovato endpoint per postare i miei dati di login, ma ho
         //notato che comunque c'è bisogno di specificare un user id per creare un nuovo contatto
         fragmentManager.beginTransaction()
                 .add(R.id.create_person_container, fragment)

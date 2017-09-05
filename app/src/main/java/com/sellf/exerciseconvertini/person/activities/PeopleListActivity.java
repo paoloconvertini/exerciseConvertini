@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
-import com.sellf.exerciseconvertini.person.model.Person;
+import com.sellf.exerciseconvertini.person.models.Person;
 import com.sellf.exerciseconvertini.person.view.PeopleListFragment;
 
 public class PeopleListActivity extends AppCompatActivity implements IOnStartNewActivityListener{
