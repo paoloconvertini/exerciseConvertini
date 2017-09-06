@@ -86,40 +86,7 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
 
             }
         });
-
-        if (getArguments() != null) {
-            SelectableFilters selectableFilters = (SelectableFilters) getArguments().getSerializable(EXTRA);
-            //dall'intent ricavo i filtri selezionati
-            this.filters = new SelectableFiltersToFiltersTransformer(selectableFilters).transform();
-            new Api().getPeopleListFiltered(this.filters.getName(),
-                    this.filters.getLastName(), this.filters.getSorting()).enqueue(new Callback<People>() {
-                @Override
-                public void onResponse(Call<People> call, Response<People> response) {
-                    hideLoadingIndicator();
-                    if (response.body() != null) {
-                        if (peopleList != null) {
-                            peopleList.clear();
-                            peopleList.addAll(response.body().getPeopleList());
-                        }
-                        adapter = new PersonRecyclerViewAdapter(listener, peopleList, mRecyclerView);
-                        mRecyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<People> call, Throwable t) {
-                    hideLoadingIndicator();
-                    if (getView() != null) {
-                        ErrorTxtView = getView()
-                                .findViewById(R.id.emptyViewTxt);
-                        ErrorTxtView.setText(R.string.empty_list_text);
-                    }
-                }
-            });
-        } else {
-            sendRequestPeopleList();
-        }
+            sendRequestPeopleList(this.filters);
         // Set the adapter
         mRecyclerView = view.findViewById(R.id.recyclerViewPeopleList);
         mRecyclerView.setHasFixedSize(true);
@@ -132,10 +99,11 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
 
 
     //Send the request to the web server to retrieve the list of rooms
-    private void sendRequestPeopleList() {
+    private void sendRequestPeopleList(Filters filters) {
         //call the server, get the Json data and convert into a Java object
 
-        Call<People> requestPeopleList = new Api().getPeopleList();
+        Call<People> requestPeopleList = new Api().getPeopleList(filters.getName(), filters.getLastName(),
+                filters.getSorting());
         requestPeopleList.enqueue(this);
     }
 
@@ -199,37 +167,12 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
                 SelectableFilters selectableFilters = (SelectableFilters)
                         data.getSerializableExtra(FiltersActivity.SELECTED_FILTER_EXTRA);
                 this.filters = new SelectableFiltersToFiltersTransformer(selectableFilters).transform();
-                new Api().getPeopleListFiltered(this.filters.getName(),
-                        this.filters.getLastName(), this.filters.getSorting()).enqueue(new Callback<People>() {
-                    @Override
-                    public void onResponse(Call<People> call, Response<People> response) {
-                        hideLoadingIndicator();
-                        if (response.body() != null) {
-                            if (peopleList != null) {
-                                peopleList.clear();
-                                peopleList.addAll(response.body().getPeopleList());
-                            }
-                            adapter = new PersonRecyclerViewAdapter(listener, peopleList, mRecyclerView);
-                            mRecyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<People> call, Throwable t) {
-                        hideLoadingIndicator();
-                        if (getView() != null) {
-                            ErrorTxtView = getView()
-                                    .findViewById(R.id.emptyViewTxt);
-                            ErrorTxtView.setText(R.string.empty_list_text);
-                        }
-                    }
-                });
+                sendRequestPeopleList(this.filters);
             }
         }
 
         if (resultCode == RESULT_CANCELED) {
-            sendRequestPeopleList();
+            sendRequestPeopleList(new Filters());
         }
 
     }

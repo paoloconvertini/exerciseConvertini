@@ -42,8 +42,7 @@ public class Api implements ApiService {
 
                         Request.Builder newRequest = request
                                 .newBuilder()
-                                .header("Api-Key", App.getContext().getString(R.string.Api_KEY))
-                                ;
+                                .header("Api-Key", App.getContext().getString(R.string.Api_KEY));
 
                         return chain.proceed(newRequest.build());
                     }
@@ -60,20 +59,15 @@ public class Api implements ApiService {
     }
 
     @Override
-    public Call<People> getPeopleList() {
-        return this.apiService.getPeopleList();
-    }
-
-    @Override
     public Call<Users> getUserList() {
         return this.apiService.getUserList();
     }
 
     @Override
-    public Call<People> getPeopleListFiltered(@Query("first_name") String firstName,
-                                              @Query("last_name") String lastName,
-                                              @Query("sort_by") String sortBy) {
-        return this.apiService.getPeopleListFiltered(firstName, lastName, sortBy);
+    public Call<People> getPeopleList(@Query("first_name") String firstName,
+                                      @Query("last_name") String lastName,
+                                      @Query("sort_by") String sortBy) {
+        return this.apiService.getPeopleList(firstName, lastName, sortBy);
     }
 
     @Override

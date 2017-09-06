@@ -18,20 +18,18 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    @GET("people")
-    Call<People> getPeopleList();
 
     @GET("users")
     Call<Users> getUserList();
 
-   @GET("people")
-    Call<People> getPeopleListFiltered(@Query("first_name") String firstName,
-                                       @Query("last_name") String lastName,
-                                       @Query("sort_by") String sortBy);
+    @GET("people")
+    Call<People> getPeopleList(@Query("first_name") String firstName,
+                               @Query("last_name") String lastName,
+                               @Query("sort_by") String sortBy);
 
     @GET("people/{id}")
-    Call<Person>getPerson(@Path("id") String id);
+    Call<Person> getPerson(@Path("id") String id);
 
     @POST("people")
-    Call<Person>createPerson(@Body Person person);
+    Call<Person> createPerson(@Body Person person);
 }
