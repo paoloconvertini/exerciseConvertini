@@ -13,12 +13,15 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sellf.exerciseconvertini.API.Api;
-import com.sellf.exerciseconvertini.error.models.ErrorBody;
 import com.sellf.exerciseconvertini.R;
+import com.sellf.exerciseconvertini.error.models.ErrorBody;
 import com.sellf.exerciseconvertini.person.activities.PeopleListActivity;
 import com.sellf.exerciseconvertini.person.models.Person;
+import com.sellf.exerciseconvertini.user.models.User;
+import com.sellf.exerciseconvertini.user.models.Users;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,7 @@ public class CreatePersonFragment extends Fragment {
     private EditText email;
     private EditText address;
     private EditText phone;
+    private ArrayList<User> userList = new ArrayList<>();
 
     public CreatePersonFragment() {
         // Required empty public constructor
@@ -44,23 +48,23 @@ public class CreatePersonFragment extends Fragment {
      * Create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param userId is the user Id.
-     * @return A new instance of fragment CreatePersonFragment.
+     * param  is the user Id.
+     * return A new instance of fragment CreatePersonFragment.
      */
-    public static CreatePersonFragment newInstance(int userId) {
+   /* public static CreatePersonFragment newInstance(int userId) {
         CreatePersonFragment fragment = new CreatePersonFragment();
         Bundle args = new Bundle();
         args.putInt(String.valueOf(R.string.EXTRA_USER_ID), userId);
         fragment.setArguments(args);
         return fragment;
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+      /*  if (getArguments() != null) {
             userId = getArguments().getInt(String.valueOf(R.string.EXTRA_USER_ID));
-        }
+        }*/
     }
 
     @Override
@@ -75,6 +79,23 @@ public class CreatePersonFragment extends Fragment {
         email = view.findViewById(R.id.email);
         address = view.findViewById(R.id.address);
         phone = view.findViewById(R.id.phone);
+
+        new Api().getUserList().enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    userList.addAll(response.body().getUserList());
+                    userId = userList.get(0).getId();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
         Button saveBtn = view.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,20 +109,27 @@ public class CreatePersonFragment extends Fragment {
     }
 
     private void createPerson(Person person) {
+
+        //mandatory fields check
         if (person.getFirstName().equals("") || person.getLastName().equals("") ||
                 person.getEmail().equals("") || person.getPhone().equals("")) {
+
             Toast.makeText(getContext(), "Nome, Cognome, Email e telefono" +
                     " non possono essere vuoti", Toast.LENGTH_LONG).show();
+
         } else {
+
             new Api().createPerson(person).enqueue(new Callback<Person>() {
+
+                //Handle the response to createPerson method
                 @Override
                 public void onResponse(Call<Person> call, Response<Person> response) {
+
                     switch (response.code()) {
                         case 422:
                             try {
                                 ErrorBody errorBody = new Gson().fromJson(response.errorBody().string(),
                                         ErrorBody.class);
-                                errorBody.getError().getDetails().getEmail();
                                 Toast.makeText(getContext(), errorBody.getError().getDetails().getEmail() +
                                         " for email field",
                                         Toast.LENGTH_LONG).show();

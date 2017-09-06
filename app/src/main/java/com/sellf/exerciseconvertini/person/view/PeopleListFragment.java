@@ -91,9 +91,8 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
     //Send the request to the web server to retrieve the list of rooms
     private void sendRequestPeopleList() {
         //call the server, get the Json data and convert into a Java object
-        Api api = new Api();
 
-        Call<People> requestPeopleList = api.getPeopleList();
+        Call<People> requestPeopleList = new Api().getPeopleList();
         requestPeopleList.enqueue(this);
     }
 

@@ -2,6 +2,7 @@ package com.sellf.exerciseconvertini.API;
 
 import com.sellf.exerciseconvertini.person.models.People;
 import com.sellf.exerciseconvertini.person.models.Person;
+import com.sellf.exerciseconvertini.user.models.Users;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,6 +21,9 @@ public interface ApiService {
     @GET("people")
     Call<People> getPeopleList();
 
+    @GET("users")
+    Call<Users> getUserList();
+
     @GET("people")
     Call<People> getPeopleListFilteredByName(@Query("first_name") String firstName);
 
@@ -34,10 +38,4 @@ public interface ApiService {
 
     @POST("people")
     Call<Person>createPerson(@Body Person person);
-
- /*
-
-    @POST("/dhp-ws/public/api/hotel/minibarlist")
-    Call<ArrayList<Room>> getRoomMinibarList(@Body Filters filters);
-*/
 }

@@ -23,7 +23,6 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         /**
          * start a new {@link PeopleListFragment} instance and pass
          * in the room number as arguments
@@ -34,6 +33,8 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
                 .add(R.id.list_people_container, fragment)
                 .commit();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

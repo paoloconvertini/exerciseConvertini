@@ -2,6 +2,7 @@ package com.sellf.exerciseconvertini.API;
 
 import com.google.gson.GsonBuilder;
 import com.sellf.exerciseconvertini.person.models.Person;
+import com.sellf.exerciseconvertini.user.models.Users;
 import com.sellf.exerciseconvertini.utils.DateTypeAdapter;
 import com.sellf.exerciseconvertini.App;
 import com.sellf.exerciseconvertini.R;
@@ -61,6 +62,11 @@ public class Api implements ApiService {
     @Override
     public Call<People> getPeopleList() {
         return this.apiService.getPeopleList();
+    }
+
+    @Override
+    public Call<Users> getUserList() {
+        return this.apiService.getUserList();
     }
 
     @Override
