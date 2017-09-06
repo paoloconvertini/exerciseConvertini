@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".person.activities.DetailPersonActivity" />
         <activity android:name=".person.activities.CreatePersonActivity"></activity>
+        <activity android:name=".filter.activities.FiltersActivity"></activity>
     </application>
 
 </manifest>

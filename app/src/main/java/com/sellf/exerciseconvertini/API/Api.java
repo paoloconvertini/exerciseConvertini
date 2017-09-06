@@ -70,18 +70,10 @@ public class Api implements ApiService {
     }
 
     @Override
-    public Call<People> getPeopleListFilteredByName(@Query("first_name") String firstName) {
-        return this.apiService.getPeopleListFilteredByName(firstName);
-    }
-
-    @Override
-    public Call<People> getPeopleListFilteredByLastName(@Query("last_name") String lastName) {
-        return this.apiService.getPeopleListFilteredByLastName(lastName);
-    }
-
-    @Override
-    public Call<People> getPeopleListSortByLastName(@Query("last_name") String lastName) {
-        return this.apiService.getPeopleListSortByLastName(lastName);
+    public Call<People> getPeopleListFiltered(@Query("first_name") String firstName,
+                                              @Query("last_name") String lastName,
+                                              @Query("sort_by") String sortBy) {
+        return this.apiService.getPeopleListFiltered(firstName, lastName, sortBy);
     }
 
     @Override

@@ -10,11 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.sellf.exerciseconvertini.R;
+import com.sellf.exerciseconvertini.filter.activities.FiltersActivity;
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
 import com.sellf.exerciseconvertini.person.models.Person;
 import com.sellf.exerciseconvertini.person.view.PeopleListFragment;
 
-public class PeopleListActivity extends AppCompatActivity implements IOnStartNewActivityListener{
+public class PeopleListActivity extends AppCompatActivity implements IOnStartNewActivityListener {
+
+
+    Fragment peopleFragment;
+    private final static int FILTER_REQUEST_CODE = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +33,11 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
          * in the room number as arguments
          */
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = new PeopleListFragment();
+        peopleFragment = new PeopleListFragment();
         fragmentManager.beginTransaction()
-                .add(R.id.list_people_container, fragment)
+                .add(R.id.list_people_container, peopleFragment)
                 .commit();
     }
-
 
 
     @Override
@@ -50,8 +54,8 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.filters) {
+            peopleFragment.startActivityForResult(new Intent(this, FiltersActivity.class), FILTER_REQUEST_CODE);
             return true;
         }
 
@@ -66,4 +70,29 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
             startActivityForResult(intent, 0);
         }
     }
+
+   /* @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(requestCode == FILTER_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                SelectableFilters selectableFilters = (SelectableFilters)
+                        data.getSerializableExtra(FiltersActivity.SELECTED_FILTER_EXTRA);
+                Fragment fragment = PeopleListFragment.newInstance(selectableFilters);
+                fragmentManager.beginTransaction()
+                        .add(R.id.list_people_container, fragment)
+                        .commit();
+
+            }
+        }
+
+        if(resultCode == RESULT_CANCELED) {
+
+            Fragment fragment = new PeopleListFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.list_people_container, fragment)
+                    .commit();
+        }
+
+    }*/
 }

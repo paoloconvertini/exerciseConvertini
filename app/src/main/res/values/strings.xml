@@ -6,8 +6,15 @@
     <string name="empty_list_text">Errore di connessione. &#xD;Riprova più tardi</string>
     <string name="EXTRA_PERSON_ID">extra_person_id</string>
     <string name="AUTORIZZAZIONE_NEGATA">Non sei autorizzato</string>
+    <string name="filtri">Filtra per</string>
+    <string name="sortBy">Ordina per Cognome</string>
+    <string name="rimuovi_filtri">Azzera</string>
+    <string name="mostra_risultati">Applica</string>
+    <string name="ordina_per">Ordina per</string>
+    <string name="cognome">Cognome</string>
+    <string name="name">Nome</string>
+    <string name="EXTRA_PEOPLE_LIST">extra_people_list</string>
+    <string name="filters">Filtra</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="EXTRA_USER_ID">extra_user_id</string>
+
 </resources>

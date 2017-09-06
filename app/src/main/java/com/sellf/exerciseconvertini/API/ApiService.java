@@ -24,14 +24,10 @@ public interface ApiService {
     @GET("users")
     Call<Users> getUserList();
 
-    @GET("people")
-    Call<People> getPeopleListFilteredByName(@Query("first_name") String firstName);
-
-    @GET("people")
-    Call<People> getPeopleListFilteredByLastName(@Query("last_name") String lastName);
-
-    @GET("people")
-    Call<People> getPeopleListSortByLastName(@Query("last_name") String lastName);
+   @GET("people")
+    Call<People> getPeopleListFiltered(@Query("first_name") String firstName,
+                                       @Query("last_name") String lastName,
+                                       @Query("sort_by") String sortBy);
 
     @GET("people/{id}")
     Call<Person>getPerson(@Path("id") String id);
