@@ -24,9 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".person.activities.DetailPersonActivity" />
-        <activity android:name=".person.activities.CreatePersonActivity"></activity>
-        <activity android:name=".filter.activities.FiltersActivity"></activity>
+        <activity android:name=".person.activities.DetailPersonActivity"
+            android:parentActivityName=".person.activities.PeopleListActivity"/>
+        <activity android:name=".person.activities.CreatePersonActivity"
+            android:parentActivityName=".person.activities.PeopleListActivity"/>
+        <activity android:name=".filter.activities.FiltersActivity"
+            android:parentActivityName=".person.activities.PeopleListActivity"/>
     </application>
 
 </manifest>

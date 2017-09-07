@@ -27,6 +27,7 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
         setContentView(R.layout.activity_list_people);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.icon_settings_dark);
 
         /**
          * start a new {@link PeopleListFragment} instance and pass

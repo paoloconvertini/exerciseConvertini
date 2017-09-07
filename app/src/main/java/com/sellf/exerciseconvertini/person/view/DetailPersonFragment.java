@@ -1,6 +1,7 @@
 package com.sellf.exerciseconvertini.person.view;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,15 @@ public class DetailPersonFragment extends Fragment {
     private Api api;
     private View loadingIndicator;
     private TextView fullname;
+    private TextView initFullName;
+    private TextView phone;
     private TextView title;
     private TextView skype;
     private TextView email;
     private TextView address;
     private TextView ErrorTxtView;
+    private ConstraintLayout fullNameLayout;
+    private ConstraintLayout contactDetailsLayout;
 
     public DetailPersonFragment() {
         // Required empty public constructor
@@ -60,7 +65,11 @@ public class DetailPersonFragment extends Fragment {
         // Inflate the layout for this fragment
         View personView = inflater.inflate(R.layout.fragment_detail_person, container, false);
         loadingIndicator = personView.findViewById(R.id.loading_indicator_fragment_person_detail);
-        fullname = personView.findViewById(R.id.full_name);
+        fullNameLayout = personView.findViewById(R.id.full_name_layout);
+        contactDetailsLayout = personView.findViewById(R.id.contact_details_layout);
+        fullname = fullNameLayout.findViewById(R.id.full_name);
+        initFullName = fullNameLayout.findViewById(R.id.init_full_name);
+        phone = contactDetailsLayout.findViewById(R.id.phone);
         title = personView.findViewById(R.id.title_person_detail);
         skype = personView.findViewById(R.id.skype);
         email = personView.findViewById(R.id.email);
@@ -104,6 +113,9 @@ public class DetailPersonFragment extends Fragment {
     private void updateUI(Person person) {
         if (getView() != null) {
             hideLoadingIndicator();
+            initFullName.setText(String.format("%s%s", person.getFirstName().substring(0,1),
+                    person.getLastName().substring(0,1)));
+            phone.setText(person.getPhone());
             fullname.setText(person.getFullName());
             title.setText(person.getTitle());
             skype.setText(person.getSkype());
