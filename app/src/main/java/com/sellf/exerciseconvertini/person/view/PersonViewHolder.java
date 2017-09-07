@@ -13,14 +13,13 @@ import com.sellf.exerciseconvertini.person.models.Person;
  * Created by pconvertini on 04/09/2017.
  */
 
-public class PersonViewHolder extends RecyclerView.ViewHolder{
+public class PersonViewHolder extends RecyclerView.ViewHolder {
 
     private LinearLayout layout;
     private TextView personNameTextView;
     private TextView personTitleTextView;
     private Person person;
-
-
+    private TextView initialName;
 
 
     public static PersonViewHolder newInstance(ViewGroup parent) {
@@ -35,6 +34,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder{
         layout = itemView;
         this.personTitleTextView = layout.findViewById(R.id.person_title);
         this.personNameTextView = layout.findViewById(R.id.person_name);
+        this.initialName = layout.findViewById(R.id.initNameTxtView);
     }
 
     public LinearLayout getLayout() {
@@ -55,6 +55,11 @@ public class PersonViewHolder extends RecyclerView.ViewHolder{
         if (person != null) {
             personNameTextView.setText(person.getFullName());
             personTitleTextView.setText(person.getTitle());
+            String initName = person.getFirstName().substring(0,1);
+            String initLastName = person.getLastName().substring(0,1);
+            initialName.setText(String.format("%s%s", initName, initLastName));
         }
+
+
     }
 }

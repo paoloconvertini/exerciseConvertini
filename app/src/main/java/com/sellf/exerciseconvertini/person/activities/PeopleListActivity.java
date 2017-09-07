@@ -70,29 +70,4 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
             startActivityForResult(intent, 0);
         }
     }
-
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if(requestCode == FILTER_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                SelectableFilters selectableFilters = (SelectableFilters)
-                        data.getSerializableExtra(FiltersActivity.SELECTED_FILTER_EXTRA);
-                Fragment fragment = PeopleListFragment.newInstance(selectableFilters);
-                fragmentManager.beginTransaction()
-                        .add(R.id.list_people_container, fragment)
-                        .commit();
-
-            }
-        }
-
-        if(resultCode == RESULT_CANCELED) {
-
-            Fragment fragment = new PeopleListFragment();
-            fragmentManager.beginTransaction()
-                    .add(R.id.list_people_container, fragment)
-                    .commit();
-        }
-
-    }*/
 }

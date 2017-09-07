@@ -35,7 +35,7 @@ public class FiltersFragment extends Fragment {
         final EditText lastNameEditTxt = view.findViewById(R.id.cognome_filter_title);
         Button removeFiltersBtn = view.findViewById(R.id.removeFiltersBtn);
         Button showResultsBtn = view.findViewById(R.id.showResultsBtn);
-        final RadioButton sortByRB = view.findViewById(R.id.sortBy_last_name_Rb);
+        final RadioButton sortByRB = view.findViewById(R.id.sortBy_last_name_Rb); //TODO meglio una checkbox
 
 
         removeFiltersBtn.setOnClickListener(new View.OnClickListener() {

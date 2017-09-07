@@ -37,7 +37,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class PeopleListFragment extends Fragment implements Callback<People> {
 
-    private final static String EXTRA = "EXTRA";
     private final static int FILTER_REQUEST_CODE = 3000;
     private ArrayList<Person> peopleList = new ArrayList<>();
     private IOnStartNewActivityListener listener;
@@ -150,14 +149,6 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
             if (loadingIndicator.getVisibility() == View.VISIBLE)
                 loadingIndicator.setVisibility(View.GONE);
         }
-    }
-
-    public static PeopleListFragment newInstance(SelectableFilters selectableFilters) {
-        Bundle args = new Bundle();
-        args.putSerializable(EXTRA, selectableFilters);
-        PeopleListFragment fragment = new PeopleListFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
