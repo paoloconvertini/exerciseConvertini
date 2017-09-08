@@ -2,12 +2,13 @@ package com.sellf.exerciseconvertini.person.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.sellf.exerciseconvertini.API.Api;
 import com.sellf.exerciseconvertini.R;
@@ -16,17 +17,14 @@ import com.sellf.exerciseconvertini.person.activities.PeopleListActivity;
 import com.sellf.exerciseconvertini.person.models.Person;
 import com.sellf.exerciseconvertini.user.models.User;
 import com.sellf.exerciseconvertini.user.models.Users;
-import com.sellf.exerciseconvertini.utils.MyFragment;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CreatePersonFragment extends MyFragment {
+public class CreatePersonFragment extends Fragment {
 
     private int userId;
     private EditText firstName;
@@ -101,7 +99,7 @@ public class CreatePersonFragment extends MyFragment {
                                 ErrorBody errorBody = new Gson().fromJson(response.errorBody().string(),
                                         ErrorBody.class);
                                 Toast.makeText(getContext(), errorBody.getError().getDetails().getEmail() +
-                                                " for email field", //TODO make generic
+                                                " for email field",
                                         Toast.LENGTH_LONG).show();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -119,8 +117,11 @@ public class CreatePersonFragment extends MyFragment {
                 @Override
                 public void onFailure(Call<Person> call, Throwable t) {
                     try {
-                        errorText(getView(), R.id.emptyViewTxt, R.string.empty_list_text);
-                    } catch (Exception e) {
+                        // Set empty state text to display
+                        if (getView() != null) {
+                            TextView errorTxtView = getView().findViewById(R.id.emptyViewTxt);
+                            errorTxtView.setText(R.string.empty_list_text);
+                        }                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

@@ -2,6 +2,7 @@ package com.sellf.exerciseconvertini.person.view;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,12 @@ import android.widget.TextView;
 import com.sellf.exerciseconvertini.API.Api;
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.person.models.Person;
-import com.sellf.exerciseconvertini.utils.MyFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailPersonFragment extends MyFragment {
+public class DetailPersonFragment extends Fragment {
 
     private String id;
     private TextView fullName;
@@ -27,7 +27,7 @@ public class DetailPersonFragment extends MyFragment {
     private EditText skype;
     private EditText email;
     private EditText address;
-    private EditText ErrorTxtView;
+    private TextView ErrorTxtView;
     private ConstraintLayout fullNameLayout;
     private ConstraintLayout contactDetailsLayout;
 
@@ -91,18 +91,31 @@ public class DetailPersonFragment extends MyFragment {
             @Override
             public void onFailure(Call<Person> call, Throwable t) {
 
-                hideLoadingIndicator(getView(),
-                        R.id.loading_indicator_fragment_person_detail);
-
-                errorText(getView(), R.id.emptyViewTxt, R.string.empty_list_text);
+                hideLoadingIndicator();
+                // Set empty state text to display
+                if (getView() != null) {
+                    ErrorTxtView = getView().findViewById(R.id.emptyViewTxt);
+                    ErrorTxtView.setText(R.string.empty_list_text);
+                }
             }
         });
     }
 
+    // Hide loading indicator because the data has been loaded
+
+    public void hideLoadingIndicator() {
+        if (getView() != null) {
+            View loadingIndicator = getView()
+                    .findViewById(R.id.loading_indicator_fragment_person_detail);
+            if (loadingIndicator.getVisibility() == View.VISIBLE)
+                loadingIndicator.setVisibility(View.GONE);
+        }
+    }
+
+
     private void updateUI(Person person) {
         if (getView() != null) {
-            hideLoadingIndicator(getView(),
-                    R.id.loading_indicator_fragment_person_detail);
+            hideLoadingIndicator();
             initFullName.setText(String.format("%s%s", person.getFirstName().substring(0,1),
                     person.getLastName().substring(0,1)));
             phone.setText(person.getPhone());
