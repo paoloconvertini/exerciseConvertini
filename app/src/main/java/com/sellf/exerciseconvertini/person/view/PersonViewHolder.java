@@ -51,7 +51,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setupView() {
-        //set the ListView with the camera list data if there is an array of camere.
+        //set the ListView with the contact list data if there is an array of people.
         if (person != null) {
             personNameTextView.setText(person.getFullName());
             personTitleTextView.setText(person.getTitle());

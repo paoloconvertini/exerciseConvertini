@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellf.exerciseconvertini.API.Api;
@@ -24,6 +22,7 @@ import com.sellf.exerciseconvertini.person.adapters.PersonRecyclerViewAdapter;
 import com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener;
 import com.sellf.exerciseconvertini.person.models.People;
 import com.sellf.exerciseconvertini.person.models.Person;
+import com.sellf.exerciseconvertini.utils.MyFragment;
 
 import java.util.ArrayList;
 
@@ -35,15 +34,13 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 
-public class PeopleListFragment extends Fragment implements Callback<People> {
+public class PeopleListFragment extends MyFragment implements Callback<People> {
 
     private final static int FILTER_REQUEST_CODE = 3000;
     private ArrayList<Person> peopleList = new ArrayList<>();
     private IOnStartNewActivityListener listener;
     private RecyclerView mRecyclerView;
-    private TextView ErrorTxtView;
     private Filters filters = new Filters();
-    private RecyclerView.Adapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -85,7 +82,7 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
 
             }
         });
-            sendRequestPeopleList(this.filters);
+        sendRequestPeopleList(this.filters);
         // Set the adapter
         mRecyclerView = view.findViewById(R.id.recyclerViewPeopleList);
         mRecyclerView.setHasFixedSize(true);
@@ -110,18 +107,22 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
     public void onResponse(Call<People> call, Response<People> response) {
         switch (response.code()) {
             case 401:
-                hideLoadingIndicator();
+                hideLoadingIndicator(getView(),
+                        R.id.loading_indicator_fragment_people_list);
+
                 Toast.makeText(getContext(), getString(R.string.AUTORIZZAZIONE_NEGATA), Toast.LENGTH_LONG)
                         .show();
                 break;
             case 200:
-                hideLoadingIndicator();
+                hideLoadingIndicator(getView(),
+                        R.id.loading_indicator_fragment_people_list);
+
                 if (response.body() != null) {
                     if (peopleList != null) {
                         peopleList.clear();
                         peopleList.addAll(response.body().getPeopleList());
                     }
-                    adapter = new PersonRecyclerViewAdapter(listener, peopleList, mRecyclerView);
+                    RecyclerView.Adapter adapter = new PersonRecyclerViewAdapter(listener, peopleList, mRecyclerView);
                     mRecyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     break;
@@ -131,25 +132,13 @@ public class PeopleListFragment extends Fragment implements Callback<People> {
 
     @Override
     public void onFailure(Call<People> call, Throwable t) {
-        hideLoadingIndicator();
-        if (getView() != null) {
-            ErrorTxtView = getView()
-                    .findViewById(R.id.emptyViewTxt);
-            ErrorTxtView.setText(R.string.empty_list_text);
-        }
+        hideLoadingIndicator(getView(),
+                R.id.loading_indicator_fragment_people_list);
+
+        errorText(getView(), R.id.emptyViewTxt, R.string.empty_list_text);
+
     }
 
-    // Hide loading indicator because the data has been loaded
-
-    public void hideLoadingIndicator() {
-        // Hide loading indicator because the data has been loaded
-        if (getView() != null) {
-            View loadingIndicator = getView()
-                    .findViewById(R.id.loading_indicator_fragment_people_list);
-            if (loadingIndicator.getVisibility() == View.VISIBLE)
-                loadingIndicator.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

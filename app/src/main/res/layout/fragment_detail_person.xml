@@ -62,8 +62,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:textColor="#fff"
                 android:textSize="18sp"
@@ -77,8 +79,8 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/contact_details_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/full_name_layout">
 
@@ -86,125 +88,153 @@
                 android:id="@+id/imagePhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/icon_phone_dark"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/phone"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/telefono"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imagePhone"
                 app:layout_constraintLeft_toRightOf="@+id/imagePhone"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imagePhone"
-                tools:text="555 55555" />
+                app:layout_constraintTop_toTopOf="@+id/imagePhone" />
 
             <ImageView
                 android:id="@+id/imageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/ic_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/title_person_detail"
                 app:layout_constraintTop_toBottomOf="@+id/imagePhone" />
 
-            <TextView
+            <EditText
                 android:id="@+id/title_person_detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/ruolo"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/imageTitle"
                 app:layout_constraintLeft_toRightOf="@+id/imageTitle"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageTitle"
-                tools:text="PhD" />
+                app:layout_constraintTop_toTopOf="@+id/imageTitle" />
 
             <ImageView
                 android:id="@+id/imageSkype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/ic_skype"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/skype"
                 app:layout_constraintTop_toBottomOf="@+id/imageTitle" />
 
-            <TextView
+            <EditText
                 android:id="@+id/skype"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/skype"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/imageSkype"
                 app:layout_constraintLeft_toRightOf="@+id/imageSkype"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageSkype"
-                tools:text="pconvertini80" />
+                app:layout_constraintTop_toTopOf="@+id/imageSkype" />
 
             <ImageView
                 android:id="@+id/imageEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/icon_email_dark"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/email"
                 app:layout_constraintTop_toBottomOf="@+id/imageSkype" />
 
-            <TextView
+            <EditText
                 android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/email"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/imageEmail"
                 app:layout_constraintLeft_toRightOf="@+id/imageEmail"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageEmail"
-                tools:text="paoloconvertini@gmail.com" />
+                app:layout_constraintTop_toTopOf="@+id/imageEmail" />
 
             <ImageView
                 android:id="@+id/imageAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/icon_address_dark"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/address"
                 app:layout_constraintTop_toBottomOf="@+id/imageEmail" />
 
-            <TextView
+            <EditText
                 android:id="@+id/address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:hint="@string/indirizzo"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageAddress"
                 app:layout_constraintLeft_toRightOf="@+id/imageAddress"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageAddress"
-                tools:text="Via Foggia 64/B" />
+                app:layout_constraintTop_toTopOf="@+id/imageAddress" />
 
         </android.support.constraint.ConstraintLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/emptyViewTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:text="@string/empty_list_text" />
 
 
 </FrameLayout>

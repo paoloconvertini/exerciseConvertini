@@ -83,7 +83,7 @@
                 android:textAllCaps="true"
                 android:textColor="#000"
                 android:textStyle="bold"
-                app:buttonTint="@color/colorPrimaryDark" />
+                app:buttonTint="@color/colorPrimary" />
         </RadioGroup>
 
         <Button

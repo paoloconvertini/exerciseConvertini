@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.filter.listeners.IOnFilterClickedListener;
@@ -22,9 +23,15 @@ public class FiltersActivity extends AppCompatActivity implements IOnFilterClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         /**
-         * start a new {@link FiltersFragment} instance
+         * start a new {@link FiltersFragment}
          */
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = new FiltersFragment();

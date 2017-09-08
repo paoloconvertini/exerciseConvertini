@@ -21,9 +21,26 @@
             android:titleTextColor="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             tools:targetApi="m">
+            <Button
+                android:layout_gravity="end"
+                android:id="@+id/saveBtn"
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Salva"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
     <FrameLayout
         android:id="@+id/create_person_container"
         android:layout_width="match_parent"

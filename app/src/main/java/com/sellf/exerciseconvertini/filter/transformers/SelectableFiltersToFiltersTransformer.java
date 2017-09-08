@@ -1,10 +1,7 @@
 package com.sellf.exerciseconvertini.filter.transformers;
 
 import com.sellf.exerciseconvertini.filter.models.Filters;
-import com.sellf.exerciseconvertini.filter.models.SelectableFilter;
 import com.sellf.exerciseconvertini.filter.models.SelectableFilters;
-
-import java.util.ArrayList;
 
 /**
  * Created by pconvertini on 25/07/2017.
@@ -48,18 +45,6 @@ public class SelectableFiltersToFiltersTransformer {
 
     private String transformLastName(SelectableFilters selectableFilters) {
         return selectableFilters.getLastName();
-    }
-
-    private ArrayList<String> transformStrings(ArrayList<SelectableFilter> selectableFilters) {
-        ArrayList<String> filters = new ArrayList<>();
-
-        for (SelectableFilter selectableFilter : selectableFilters) {
-
-            if (selectableFilter.isSelected()) {
-                filters.add(selectableFilter.getName());
-            }
-        }
-        return filters;
     }
 
     @Override

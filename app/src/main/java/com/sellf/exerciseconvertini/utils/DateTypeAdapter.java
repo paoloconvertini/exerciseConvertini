@@ -26,7 +26,7 @@ public class DateTypeAdapter implements JsonDeserializer<LocalDateTime>,
 
         JsonPrimitive jsonPrimitive;
         try {
-            jsonPrimitive = new JsonPrimitive(dateTime.toString("YYYY-MM-dd HH:mm:ss.SSSSSS"));
+            jsonPrimitive = new JsonPrimitive(dateTime.toString("YYYY-MM-dd HH:mm:ss.SSS"));
         } catch (Exception e) {
             e.printStackTrace();
             jsonPrimitive = new JsonPrimitive(dateTime.toString("HH:mm"));
@@ -40,7 +40,7 @@ public class DateTypeAdapter implements JsonDeserializer<LocalDateTime>,
 
 
         DateTimeParser[] parsers = {
-                DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSSSSS").getParser(),
+                DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSS").getParser(),
                 DateTimeFormat.forPattern("HH:mm").getParser()};
         DateTimeFormatter formatter = new DateTimeFormatterBuilder().append(null, parsers).toFormatter();
 

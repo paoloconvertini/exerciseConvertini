@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.filter.activities.FiltersActivity;
@@ -27,11 +27,20 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
         setContentView(R.layout.activity_list_people);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setIcon(R.drawable.icon_settings_dark);
+        ImageButton filterBtn = toolbar.findViewById(R.id.filterBtn);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                peopleFragment.startActivityForResult(new Intent(
+                        PeopleListActivity.this, FiltersActivity.class), FILTER_REQUEST_CODE);
+            }
+        });
         /**
-         * start a new {@link PeopleListFragment} instance and pass
-         * in the room number as arguments
+         * start a new {@link PeopleListFragment}
          */
         FragmentManager fragmentManager = getSupportFragmentManager();
         peopleFragment = new PeopleListFragment();
@@ -40,29 +49,9 @@ public class PeopleListActivity extends AppCompatActivity implements IOnStartNew
                 .commit();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.filters) {
-            peopleFragment.startActivityForResult(new Intent(this, FiltersActivity.class), FILTER_REQUEST_CODE);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    /** Method needs to be implemented from {@link com.sellf.exerciseconvertini.person.listeners.IOnStartNewActivityListener}
+    *
+     */
     @Override
     public void startNewActivity(Person person) {
         if (findViewById(R.id.detail_container) == null) {
