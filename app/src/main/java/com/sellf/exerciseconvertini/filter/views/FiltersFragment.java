@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import com.sellf.exerciseconvertini.R;
 import com.sellf.exerciseconvertini.filter.listeners.IOnFilterClickedListener;
@@ -35,7 +35,7 @@ public class FiltersFragment extends Fragment {
         final EditText lastNameEditTxt = view.findViewById(R.id.cognome_filter_title);
         Button removeFiltersBtn = view.findViewById(R.id.removeFiltersBtn);
         Button showResultsBtn = view.findViewById(R.id.showResultsBtn);
-        final RadioButton sortByRB = view.findViewById(R.id.sortBy_last_name_Rb); //TODO meglio una checkbox
+        final CheckBox sortByCB = view.findViewById(R.id.sortByCB);
 
 
         removeFiltersBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class FiltersFragment extends Fragment {
                     } else {
                         selectableFilters.setLastName(null);
                     }
-                    if (sortByRB.isChecked()) {
+                    if (sortByCB.isChecked()) {
                         selectableFilters.setSorting("last_name");
                     }
                     ((IOnFilterClickedListener) getContext()).onFilterClick(selectableFilters);
